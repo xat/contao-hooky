@@ -55,6 +55,7 @@ class Hooky
 	 * @param $m
 	 * @param $n
 	 * @param $o
+	 * @return boolean
 	 */
 	public static function trigger($strHook, &$a=null, &$b=null, &$c=null, &$d=null, &$e=null, &$f=null, &$g=null, &$h=null, &$i=null, &$j=null, &$k=null, &$l=null, &$m=null, &$n=null, &$o=null)
 	{
@@ -64,7 +65,6 @@ class Hooky
 		// anymore if I would use that (see https://gist.github.com/4426999)
 		// So here we are, have arguments from a to o
 
-
 		if (isset($GLOBALS['TL_HOOKS'][$strHook]) && is_array($GLOBALS['TL_HOOKS'][$strHook]))
 		{
 			foreach ($GLOBALS['TL_HOOKS'][$strHook] as $callback)
@@ -72,6 +72,10 @@ class Hooky
 				$objHook = self::getObject($callback[0]);
 				$objHook->$callback[1]($a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k, $l, $m, $n, $o);
 			}
+
+			return true;
 		}
+
+		return false;
 	}
 }
